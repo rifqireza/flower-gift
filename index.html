@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
     <title>Flowers</title>
 </head>
+
 <body>
     <div class="greetings">
         <span>N</span>
@@ -33,7 +35,19 @@
         <button>
             <a href="flower.html">Klik disini</a>
         </button>
-        
     </div>
+
+    <script>
+        const params = new URLSearchParams(document.location.search);
+        const names = params.get("name")
+        const greetings = document.getElementsByClassName("greetings")
+
+        names.split(" ").map((name, i) => {
+            greetings[i].innerHTML = name.split("").map(e => {
+                return `<span>${e}</span>`
+            }).join("")
+        })
+    </script>
 </body>
+
 </html>
