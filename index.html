@@ -11,22 +11,24 @@
 </head>
 
 <body>
-    <div class="greetings">
-        <span>N</span>
-        <span>A</span>
-        <span>B</span>
-        <span>I</span>
-        <span>L</span>
-        <span>A</span>
-        <span>H</span>
-    </div>
-    <div class="greetings">
-        <span>C</span>
-        <span>A</span>
-        <span>N</span>
-        <span>T</span>
-        <span>I</span>
-        <span>K</span>
+    <div id="name-template">
+        <div class="greetings">
+            <span>N</span>
+            <span>A</span>
+            <span>B</span>
+            <span>I</span>
+            <span>L</span>
+            <span>A</span>
+            <span>H</span>
+        </div>
+        <div class="greetings">
+            <span>C</span>
+            <span>A</span>
+            <span>N</span>
+            <span>T</span>
+            <span>I</span>
+            <span>K</span>
+        </div>
     </div>
     <div class="description">
         <span>Aku punya hadiah spesial buat kamu nih....</span>
@@ -40,12 +42,22 @@
     <script>
         const params = new URLSearchParams(document.location.search);
         const names = params.get("name")
-        const greetings = document.getElementsByClassName("greetings")
+        const isEdit = params.get("form")
+        const template = document.getElementById("name-template")
 
-        names.split(" ").map((name, i) => {
-            greetings[i].innerHTML = name.split("").map(e => {
+        if (isEdit) {
+            let person = prompt("Please enter your name");
+            if (person != null) {
+                window.location.href = '?name=' + person
+            }
+        }
+
+        template.innerHTML = names.split(" ").map((name, i) => {
+            return `<div class="greetings">
+            ${name.split("").map(e => {
                 return `<span>${e}</span>`
-            }).join("")
+            }).join("")}
+            </div>`
         })
     </script>
 </body>
